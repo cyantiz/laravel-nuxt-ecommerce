@@ -8,6 +8,23 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    //contrusctor 
+    public function __construct()
+    {
+        $this->middleware('auth.role:1')->only([
+            'store',
+            'update',
+            'destroy'
+        ]);
+
+        // user can only access and edit his/her own data
+        $this->middleware('auth.user')->only([
+            'show',
+            'update'
+        ]);
+    }
+
     public function index()
     {
         $users = User::all();

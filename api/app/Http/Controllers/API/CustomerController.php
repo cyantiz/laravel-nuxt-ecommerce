@@ -12,7 +12,10 @@ use Illuminate\Http\Request;
 use FFI\Exception;
 
 class CustomerController extends Controller
-{
+{   
+
+    
+
     // customer controller:
     public function index()
     {

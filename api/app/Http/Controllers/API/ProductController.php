@@ -8,6 +8,15 @@ use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
+    //constructor
+    public function __construct()
+    {
+        $this->middleware('auth.role:1')->only([
+            'store',
+            'update',
+            'destroy'
+        ]);
+    }
 
     public function index()
     {

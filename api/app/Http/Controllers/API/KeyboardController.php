@@ -7,9 +7,17 @@ use App\Models\Keyboard;
 use Illuminate\Http\Request;
 
 class KeyboardController extends Controller
-{
-    // controller functions for keyboard (App\Models\Keyboard), keyboard key: name: api response
-    //show
+{   
+    //constructor
+    public function __construct()
+    {
+        $this->middleware('auth.role:1')->only([
+            'store',
+            'update',
+            'destroy'
+        ]);
+    }
+
     public function show($product_id)
     {
         $keyboard = Keyboard::firstWhere('product_id', $product_id);
