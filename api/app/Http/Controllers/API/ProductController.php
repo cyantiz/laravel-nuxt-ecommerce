@@ -20,8 +20,8 @@ class ProductController extends Controller
 
     public function index()
     {
-    $products = Product::withCount('lovedCustomers')->with('thumbnail')->get();
-        if(count($products) > 0) {
+        $products = Product::withCount('lovedCustomers')->with('thumbnail')->get();
+        if (count($products) > 0) {
             return response()->json(['data' => $products], 200);
         } else {
             return response()->json(['message' => 'No products found'], 404);
@@ -31,23 +31,23 @@ class ProductController extends Controller
     public function show($product_id)
     {
         $product = Product::withCount('lovedCustomers')->with('thumbnail')->find($product_id);
-        if(!$product) {
+        if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
         }
         return response()->json($product, 200);
     }
-    
+
     public function store(Request $request)
     {
         $product = Product::create($request->all());
-        if(!$product) {
+        if (!$product) {
             return response()->json(['message' => 'Product not created'], 404);
         }
         return response()->json($product);
     }
     public function update(Request $request, Product $product)
     {
-        if(!$product) {
+        if (!$product) {
             return response()->json(['message' => 'Product not updated'], 404);
         }
         $product->update($request->all());
@@ -56,7 +56,7 @@ class ProductController extends Controller
     public function delete($id)
     {
         $product = Product::find($id);
-        if(!$product) {
+        if (!$product) {
             return response()->json(['message' => 'Product not deleted'], 404);
         }
         $product->delete();
@@ -66,7 +66,7 @@ class ProductController extends Controller
     public function getProductByCategory($category)
     {
         $products = Product::where('category', $category)->get();
-        if(count($products) > 0) {
+        if (count($products) > 0) {
             return response()->json(['data' => $products], 200);
         } else {
             return response()->json(['message' => 'No products found'], 404);
@@ -77,7 +77,7 @@ class ProductController extends Controller
     public function getProductByFilter($category, $brand, $min, $max)
     {
         $products = Product::where('category', $category)->where('brand', $brand)->whereBetween('price', [$min, $max])->get();
-        if(count($products) > 0) {
+        if (count($products) > 0) {
             return response()->json(['data' => $products], 200);
         } else {
             return response()->json(['message' => 'No products found'], 404);
@@ -88,11 +88,10 @@ class ProductController extends Controller
     public function getLovedCount($product_id)
     {
         $product = Product::find($product_id);
-        if(!$product) {
+        if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
         }
         $loved_count = $product->lovedCustomer()->count();
         return response()->json(['loved_count' => $loved_count], 200);
     }
-
 }

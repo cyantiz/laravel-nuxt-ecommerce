@@ -28,7 +28,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        if(count($users) > 0) {
+        if (count($users) > 0) {
             return response()->json(['data' => $users], 200);
         } else {
             return response()->json(['message' => 'No users found'], 404);
@@ -37,7 +37,7 @@ class UserController extends Controller
     public function show($email)
     {
         $user = User::firstWhere('email', $email);
-        if(!$user) {
+        if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
         return response()->json($user);
@@ -45,7 +45,7 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        if(!$user) {
+        if (!$user) {
             return response()->json(['message' => 'User not updated'], 404);
         }
         $user->update($request->all());
@@ -54,7 +54,7 @@ class UserController extends Controller
     public function delete($email)
     {
         $user = User::firstWhere('email', $email);
-        if(!$user) {
+        if (!$user) {
             return response()->json(['message' => 'User not deleted'], 404);
         }
         $user->delete();
