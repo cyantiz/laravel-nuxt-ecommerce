@@ -19,11 +19,10 @@ import Avatar from 'primevue/avatar';
 import AvatarGroup from 'primevue/avatargroup';
 import Badge from 'primevue/badge';
 import BadgeDirective from 'primevue/badgedirective';
-
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
-import ColumnGroup from 'primevue/columngroup';     //optional for column grouping
-import Row from 'primevue/row';                     //optional for row
+import ColumnGroup from 'primevue/columngroup'; //optional for column grouping
+import Row from 'primevue/row'; //optional for row
 import DataView from 'primevue/dataview';
 import Paginator from 'primevue/paginator';
 import ConfirmDialog from 'primevue/confirmdialog'
@@ -46,11 +45,11 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.use(ConfirmationService)
 
     // * components
-    nuxtApp.vueApp.component('Button', Button); 
-    nuxtApp.vueApp.component('InputText', InputText); 
-    nuxtApp.vueApp.component('InputNumber', InputNumber);   
-    nuxtApp.vueApp.component('InputSwitch', InputSwitch);  //switch
-    nuxtApp.vueApp.component('Tag', Tag); 
+    nuxtApp.vueApp.component('Button', Button);
+    nuxtApp.vueApp.component('InputText', InputText);
+    nuxtApp.vueApp.component('InputNumber', InputNumber);
+    nuxtApp.vueApp.component('InputSwitch', InputSwitch); //switch
+    nuxtApp.vueApp.component('Tag', Tag);
     nuxtApp.vueApp.component('FileUpload', FileUpload);
     nuxtApp.vueApp.component('Chart', Chart);
     nuxtApp.vueApp.component('Toast', Toast);
