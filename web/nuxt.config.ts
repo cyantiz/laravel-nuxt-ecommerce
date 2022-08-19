@@ -1,11 +1,22 @@
-import { defineNuxtConfig } from "nuxt";
+import { defineNuxtConfig } from 'nuxt';
+import Components from 'unplugin-vue-components/vite';
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-    css: [
-        "primevue/resources/themes/saga-blue/theme.css",
-        "primevue/resources/primevue.css",
-        "primeicons/primeicons.css",
-        "primeflex/primeflex.css",
-    ],
+    css: ['ant-design-vue/dist/antd.css'],
+    vite: {
+        plugins: [
+            Components({
+                resolvers: [AntDesignVueResolver()],
+            }),
+        ],
+        ssr: {
+            noExternal: ['moment', 'compute-scroll-into-view', 'ant-design-vue'],
+        },
+    },
+    modules: ['@nuxtjs/tailwindcss'],
+    tailwindcss: {
+        // Options
+    }
+
 });

@@ -1,10 +1,9 @@
 <script setup lang="ts">
 defineProps<{ }>();
-import abc from '@/components/abc.vue'
 </script>
 
 <template>
-    <NuxtPage />    
+    abc
 </template>
 
 <style lang="less" scoped>
