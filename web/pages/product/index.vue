@@ -11,10 +11,9 @@ export default {
 
 <template>
     <div>
-        abc
     </div>
 </template>
 
 <style lang="less" scoped>
 
-</style>
+</style> 
