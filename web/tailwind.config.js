@@ -17,8 +17,12 @@ module.exports = {
       'muted': '#6e6a86',
       'subtle': '#908caa',
       'black': '#000',
+      'white': '#fff',
     },
 
   },
   plugins: [],
+  corePlugins: {
+    preflight: false,
+  }
 }

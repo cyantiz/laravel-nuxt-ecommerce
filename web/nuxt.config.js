@@ -87,6 +87,10 @@ export default {
           javascriptEnabled: true
         }
       }
-    }
+    },
+    extend(config, ctx) {}, // blah blah
+  },
+  server: {
+    host: '0.0.0.0',
   }
 }

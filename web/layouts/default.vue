@@ -2,6 +2,7 @@
 <template>
     <div class="__default">
         <Header />
+        <SideCart />
         <Nuxt />
     </div>
 </template>

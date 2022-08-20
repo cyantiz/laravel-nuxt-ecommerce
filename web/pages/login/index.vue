@@ -21,7 +21,7 @@ export default {
 
 <template>
     <div id="login">
-        <h1 class="title font-bold text-3xl mb-8">Login</h1>
+        <h1 class="title font-bold text-3xl mb-16">Login</h1>
         <a-form
             layout="vertical"
             :form="form"
@@ -95,11 +95,20 @@ export default {
                 </NuxtLink>
             </div>
             <a-form-item>
-                <a-button size="large" type="primary" html-type="submit"  block>
-                    Log in
+                <a-button size="large" class="font-bold" type="primary" html-type="submit"  block>
+                    Login
                 </a-button>
             </a-form-item>
         </a-form>
+
+        <div class="suggest-create-account flex flex-col mt-20">
+            <span class="text-center text-[16px] mb-2">Don't have an account?</span>
+
+            <NuxtLink to="/register" class="h-10 font-bold w-full max-w-[336px] bg-black flex justify-center items-center text-[16px] cursor-pointer hover:bg-white hover:text-love transition-all duration-300" >
+                Create account
+            </NuxtLink>
+        </div>
+        
     </div>
 </template>
 
