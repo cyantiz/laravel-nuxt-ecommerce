@@ -3,23 +3,19 @@ export default {
     layout: 'default',
     data() {
         return {
-            
         }
     },
     computed: {
-        cart() {
-            return this.$store.state.cart.cart
-        },
-    },
-    created() {
-        
-    },
+        user() {
+            return this.$store.state.users.user;
+        }
+    }
 }
 </script>
 
 <template>
     <div>
-        {{cart}}
+        {{user}}
     </div>
 </template>
 

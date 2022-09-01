@@ -42,11 +42,28 @@ body {
 }
 
 .ant-btn.ant-btn-primary span {
-    color: #000;
+    color: #2a273f;
 }
 
 .ant-input {
     &:focus {
         box-shadow: 0 0 0 3px rgba(235, 111, 146, 0.3)
     }
+}
+
+.ant-input:autofill,
+.ant-input:-webkit-autofill,
+.ant-input:-webkit-autofill:hover, 
+.ant-input:-webkit-autofill:focus,
+.ant-textarea:-webkit-autofill,
+.ant-textarea:-webkit-autofill:hover,
+.ant-textarea:-webkit-autofill:focus,
+.ant-select:-webkit-autofill,
+.ant-select:-webkit-autofill:hover,
+.ant-select:-webkit-autofill:focus {
+    background-image: none !important;
+    background-color: #232136 !important;
+    color: rgb(224, 222, 244) !important;
+    -webkit-box-shadow: 0 0 0 30px #232136 inset !important;
+    -webkit-text-fill-color: rgb(244, 222, 244) !important;
 }

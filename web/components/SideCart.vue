@@ -1,53 +1,15 @@
 <script>
+import { Icon, Button} from 'ant-design-vue'
+
 export default {
     name: 'SideCart',
+    components: {
+        Icon,
+        Button
+    },
     data() {
         return {
             isShow: false,
-            cart: {
-                items: [
-                    {
-                        id: 1,
-                        name: 'Product 1',
-                        thumbnail:
-                            'https://photo2.tinhte.vn/data/attachment-files/2022/08/6073609_image.png',
-                        price: 100000,
-                        quantity: 1,
-                    },
-                    {
-                        id: 2,
-                        name: 'Product 2 with a really long name to check if responsive works well as i expect',
-                        thumbnail:
-                            'https://photo2.tinhte.vn/data/attachment-files/2022/08/6073609_image.png',
-                        price: 200000,
-                        quantity: 2,
-                    },
-                    {
-                        id: 3,
-                        name: 'Product 3',
-                        thumbnail:
-                            'https://photo2.tinhte.vn/data/attachment-files/2022/08/6073609_image.png',
-                        price: 300000,
-                        quantity: 3,
-                    },
-                    {
-                        id: 4,
-                        name: 'Product 4',
-                        thumbnail:
-                            'https://photo2.tinhte.vn/data/attachment-files/2022/08/6073609_image.png',
-                        price: 400000,
-                        quantity: 4,
-                    },
-                    {
-                        id: 5,
-                        name: 'Product 5',
-                        thumbnail:
-                            'https://photo2.tinhte.vn/data/attachment-files/2022/08/6073609_image.png',
-                        price: 500000,
-                        quantity: 5,
-                    },
-                ],
-            },
         }
     },
     computed: {
@@ -56,6 +18,12 @@ export default {
                 return total + item.price * item.quantity
             }, 0)
         },
+        cart() {
+            return this.$store.state.cart
+        }
+    },
+    async created() {
+        await this.$store.dispatch('cart/loadCart')
     },
     methods: {
         toggleSideCart() {
@@ -83,12 +51,12 @@ export default {
                 <ul class="cart__items px-[15px] py-[10px] flex flex-col max-h-[312px] overflow-y-scroll">
                     <li
                         v-for="item in cart.items"
-                        :key="item.id"
+                        :key="item.product_id"
                         class="list-none"
                     >
                         <div class="flex">
                             <img
-                                :src="item.thumbnail"
+                                :src="item.thumbnail.image_url"
                                 alt="#"
                                 class="item-thumbnail w-20 h-20 object-cover mr-[10px]"
                             />
@@ -116,12 +84,12 @@ export default {
                 </div>
                 <div class="cart__pay-btn-container px-[15px] py-[5px]"></div>
                 <div class="px-[15px] pt-[5px] pb-[10px]">
-                    <a-button
+                    <Button
                         class="uppercase font-bold"
                         type="primary"
                         size="large"
                         block
-                    >Checkout</a-button>
+                    >Checkout</Button>
                 </div>
             </div>
         </div>
@@ -130,7 +98,7 @@ export default {
             @click="toggleSideCart"
         >
             <div class="order-count text-center text-md font-bold">{{cart.items.length}}</div>
-            <a-icon
+            <Icon
                 type="shopping-cart"
                 class="text-lg"
             />

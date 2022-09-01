@@ -6,20 +6,12 @@ export default {
             
         }
     },
-    computed: {
-        cart() {
-            return this.$store.state.cart.cart
-        },
-    },
-    created() {
-        
-    },
 }
 </script>
 
 <template>
     <div>
-        {{cart}}
+        adminsssssss
     </div>
 </template>
 
