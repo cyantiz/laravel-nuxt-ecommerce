@@ -131,7 +131,7 @@ class AuthController extends Controller
             'exp' => auth()->payload()->get('exp'),
             'iat' => auth()->payload()->get('iat'),
             'user' => auth()->user(),
-        ]);
+        ], 200);
     }
 
     public function changePassWord(Request $request)

@@ -60,21 +60,17 @@ class CartController extends Controller
         $customer_id = $request->user()->customer->customer_id;
         $cart = Cart::where('customer_id', $customer_id)->first();
         if ($cart) {
-            $products = $cart->products()->get();
+            $products = $cart->products()->with('thumbnail')->get();
             $products->transform(function ($product) {
                 $product->quantity = $product->pivot->quantity;
                 return $product;
             });
-            return response()->json([
-                'status' => 'success',
-                'data' => $products,
-                'message' => 'Cart of customer ' . $request->user()->customer->customer_id . ' loaded successfully',
-            ], 200);
+            return response()->json($products, 200);
         }
         return response()->json([
             'status' => false,
             'message' => 'Cart not found',
-        ]);
+        ], 404);
     }
 
     public function addProduct(Request $request)
@@ -115,11 +111,12 @@ class CartController extends Controller
     {
         $customer_id = $request->user()->customer->customer_id;
         $cart = Cart::where('customer_id', $customer_id)->first();
-        if (!$cart) {
-            $cart = Cart::create([
-                'customer_id' => $customer_id,
-            ]);
-        }
+        // log $cart in string format to console
+        // if (!$cart) {
+        //     $cart = Cart::create([
+        //         'customer_id' => $customer_id,
+        //     ]);
+        // }
         $cart->products()->attach($request->product_id, ['quantity' => $request->quantity]);
         return response()->json([
             'status' => 'success',
