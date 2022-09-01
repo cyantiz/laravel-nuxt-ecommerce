@@ -74,8 +74,13 @@ class ProductController extends Controller
     }
 
     // get all product by filter (cover cases: all category, all brand, all price)
-    public function getProductByFilter($category, $brand, $min, $max)
-    {
+    public function getProductByFilter($request)
+    {   
+        $category = $request->category; 
+        $brand =  $request->brand; 
+        $min = $request->min;
+        $max = $request->max;
+
         $products = Product::where('category', $category)->where('brand', $brand)->whereBetween('price', [$min, $max])->get();
         if (count($products) > 0) {
             return response()->json(['data' => $products], 200);
@@ -94,4 +99,36 @@ class ProductController extends Controller
         $loved_count = $product->lovedCustomer()->count();
         return response()->json(['loved_count' => $loved_count], 200);
     }
+
+    public function toggleLoveProduct($request)
+    {
+        $productId = $request->product_id;
+        $userId = $request->user_id;
+        if (!$productId || !$userId) {
+            return response()->json(['message' => 'Product or user not found'], 404);
+        }
+
+        $product = Product::find($productId);
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
+        $toggled = $product->loves()->toggle([$userId]);
+
+        if (!$toggled) {
+            return response()->json(['message' => 'Product love can\'t be toggled'], 404);
+        }
+
+        $loved = $toggled['attached'] ? true : false;
+
+        return response()->json(
+            [
+                'success' => true,
+                'data' => ["loved" => $loved],
+                'message' => $loved ? ('User ' . $userId . ' liked post ' . $productId) : ('User ' . $userId . ' unliked post ' . $productId),
+            ],
+            200
+        );
+    }
 }
+

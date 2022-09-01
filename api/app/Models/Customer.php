@@ -38,5 +38,8 @@ class Customer extends Model
         return $this->belongsToMany(Product::class, 'customer_loved_product', 'product_id', 'customer_id');
     }
 
-    
+    public function cart()
+    {
+        return $this->hasOne(Cart::class, 'customer_id', 'customer_id');
+    } 
 }

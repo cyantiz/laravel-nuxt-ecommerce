@@ -11,6 +11,7 @@ use App\Http\Controllers\API\KeycapController;
 use App\Http\Controllers\API\MechaSwitchController;
 use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\RatingController;
+use App\Http\Controllers\API\CartController;
 
 
 use Illuminate\Http\Request;
@@ -34,15 +35,23 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
-
 ], function ($router) {
     Route::post('/login', [AuthController::class, 'login']);
-    // Route::post('/register', [AuthController::class, 'register']);
+    // Route::post('register', [AuthController::class, 'register']);
     Route::post('/register', [CustomerController::class, 'store']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
     Route::post('/change-pass', [AuthController::class, 'changePassWord']);    
+});
+
+
+Route::group([
+    'middleware' => 'api',
+], function($router) {
+    Route::get('/customer/cart', [CartController::class, 'customerShow']);
+    Route::post('/customer/cart/add-product', [CartController::class, 'customerAddProduct']);
+    Route::post('/customer/cart/remove-product', [CartController::class, 'customerRemoveProduct']);
 });
 
 Route::post('/customer/{customerId}/product/{productId}', [CustomerController::class, 'toggleLovedProduct']);

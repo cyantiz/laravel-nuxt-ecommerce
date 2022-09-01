@@ -170,5 +170,9 @@ class DatabaseSeeder extends Seeder
             'material' => "PBT Plastic",
         ]);
 
+        \App\Models\Cart::create([
+            'customer_id' => 1,
+        ]);
+        
     }
 }
