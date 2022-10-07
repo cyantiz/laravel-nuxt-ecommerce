@@ -57,7 +57,7 @@ Route::group([
 Route::post('/customer/{customerId}/product/{productId}', [CustomerController::class, 'toggleLovedProduct']);
 Route::get('/customer/{customerId}/loved', [CustomerController::class, 'getLovedProducts']);
 
-Route::get('/products', [ProductController::class, 'index']);
+Route::get('/product', [ProductController::class, 'index']);
 
 //get single product by product_id
-Route::get('/products/{product_id}', [ProductController::class, 'show']);
+Route::get('/product/{product_id}', [ProductController::class, 'show']);

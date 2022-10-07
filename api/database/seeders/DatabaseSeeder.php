@@ -169,6 +169,16 @@ class DatabaseSeeder extends Seeder
             'profile' => "OEM",
             'material' => "PBT Plastic",
         ]);
+        \App\Models\Keycap::create([
+            'product_id' => 5,
+            'profile' => "OEM",
+            'material' => "PBT Plastic",
+        ]);
+        \App\Models\Keycap::create([
+            'product_id' => 6,
+            'profile' => "OEM",
+            'material' => "PBT Plastic",
+        ]);
 
         \App\Models\Cart::create([
             'customer_id' => 1,

@@ -13,7 +13,7 @@ class Product extends Model
     protected $primaryKey = 'product_id';
     protected $fillable = ['name', 'price', 'category', 'brand', 'in_stock', 'description'];
 
-    public function loves()
+    public function lovedCustomers()
     {
         return $this->belongsToMany(Customer::class, 'customer_loved_product', 'product_id', 'customer_id');
     }

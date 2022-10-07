@@ -22,7 +22,7 @@ class ProductController extends Controller
     {
         $products = Product::withCount('lovedCustomers')->with('thumbnail')->get();
         if (count($products) > 0) {
-            return response()->json(['data' => $products], 200);
+            return response()->json($products, 200);
         } else {
             return response()->json(['message' => 'No products found'], 404);
         }

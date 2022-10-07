@@ -25,8 +25,6 @@ return new class extends Migration
             $table->boolean('pre_lubed')->nullable();
             $table->timestamps();
             $table->foreign('product_id')->references('product_id')->on('products')->onDelete('cascade');
-            
-            
         });
 
     }
