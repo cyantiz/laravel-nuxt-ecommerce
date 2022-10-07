@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie';
 import { message } from 'ant-design-vue'
-
+import { login, logout } from '@/utils/api'
 export const state = () => ({
     user: null,
 }) 
@@ -12,10 +12,10 @@ export const mutations = {
 }
 
 export const actions = {
-    async login({ commit, $axios, $router }, account) {
-        // acounts: {email, password}
+    async login({ commit, $axios }, account ) {
+        // accounts: {email, password}
         try {
-            const { data } = await this.$axios.post('auth/login', account);
+            const { data } = await login(account);
             console.log(data);
             Cookie.set('access_token', data.access_token)
             commit('SET_USER', { email: data.user.email, role: data.user.role });
@@ -24,7 +24,7 @@ export const actions = {
                 location.reload();
             }
             else {
-                $router.redirect('/');
+                this.app.router.push('/')
                 location.reload();
             }
         }
@@ -37,11 +37,17 @@ export const actions = {
         }
     },
     async logout({ commit, $axios }) {
-        await this.$axios.post('auth/logout');
-        localStorage.clear()
-        Cookie.remove('access_token');
-        commit('SET_USER', null);
-        location.href = '/';
-        location.reload();
+        try {
+            await logout();
+            localStorage.clear()
+            Cookie.remove('access_token');
+            commit('SET_USER', null);
+            location.href = '/';
+            location.reload();
+        }
+        catch (err) {
+            console.log(err);
+            
+        }
     },
 }

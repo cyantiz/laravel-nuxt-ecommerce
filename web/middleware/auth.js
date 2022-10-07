@@ -1,7 +1,12 @@
 export default function ({store, route, redirect}) {
     const user = store.state.users.user;
     const adminRoute = /\/admin\/*/g;
-    const authRoute =  /\/login\/*/g
+    const authRoute = /\/login\/*/g
+    
+    if (user && route.path.match(authRoute)) {
+        redirect('/');
+    }
+
     if (!user && (user?.role !== 1) && route.path.match(adminRoute)) {
         redirect("/");
     }

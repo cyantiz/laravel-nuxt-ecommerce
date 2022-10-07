@@ -123,9 +123,6 @@ export default {
 .cart__divider {
     width: calc(100% - 30px);
 }
-.divider {
-    background: url('~/assets/images/bg_divider.png') repeat-x 7px;
-}
 .text-2-line {
     display: -webkit-box;
     -webkit-line-clamp: 2;

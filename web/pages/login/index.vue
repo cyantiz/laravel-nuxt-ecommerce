@@ -21,7 +21,7 @@ export default {
             this.form.validateFields((err, values) => {
                 // values should be {email: 'xxx', password: 'xxx'}
                 if (!err) {
-                    this.$store.dispatch('users/login', values); 
+                    this.$store.dispatch('users/login', values ); 
                 }
             })
         },

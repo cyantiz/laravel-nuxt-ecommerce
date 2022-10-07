@@ -1,3 +1,4 @@
+import { getCart } from "~/utils/api";
 
 export const state = () => ({
     items: [],
@@ -18,7 +19,7 @@ export const actions = {
                 commit('SET_CART', _cache);
             }
             else {
-                const {data}= await this.$axios.get('/customer/cart');
+            const { data } = await getCart();
                 commit('SET_CART', data);
                 localStorage.setItem('cart', JSON.stringify(data));
             }
